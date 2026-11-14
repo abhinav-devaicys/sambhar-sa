@@ -4,12 +4,12 @@ import { BRAND } from '../data/sambharsa';
 import { BrandMark } from './BrandMark';
 
 const FOOTER_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'Our Story', href: '#our-story' },
-  { label: 'Signature Menu', href: '#menu' },
-  { label: 'Dining Experience', href: '#experience' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Find Us', href: '#visit-us' },
+  { label: 'Home', href: '#home', external: false },
+  { label: 'Our Story', href: '#our-story', external: false },
+  { label: 'Signature Menu', href: '#menu', external: false },
+  { label: 'Dining Experience', href: '#experience', external: false },
+  { label: 'Reviews', href: '#reviews', external: false },
+  { label: 'Find Us', href: BRAND.googleMapsUrl, external: true },
 ];
 
 export function Footer() {
@@ -44,9 +44,12 @@ export function Footer() {
             </h2>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_LINKS.map((item) => (
-                <li key={item.href}>
+                <li key={item.label}>
                   <a
                     href={item.href}
+                    {...(item.external
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
                     className="text-sm text-[#F3EBDD]/85 hover:text-[#E7B928] transition-colors"
                   >
                     {item.label}

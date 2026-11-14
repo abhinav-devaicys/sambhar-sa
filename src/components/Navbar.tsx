@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { BRAND } from '../data/sambharsa';
 import { BrandMark } from './BrandMark';
 
 const NAV_LINKS = [
@@ -82,7 +83,9 @@ export function Navbar() {
         {/* Zone 3: Primary Action + Mobile Trigger */}
         <div className="flex items-center gap-3 shrink-0">
           <a
-            href="#visit-us"
+            href={BRAND.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`hidden md:inline-flex items-center justify-center rounded-[3px] px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 ${
               isSolid
                 ? 'bg-[#183D2D] text-[#F3EBDD] hover:bg-[#122f22] focus-visible:outline-[#183D2D]'
@@ -135,7 +138,9 @@ export function Navbar() {
               ))}
               <div className="pt-5">
                 <a
-                  href="#visit-us"
+                  href={BRAND.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={handleLinkClick}
                   className="flex min-h-[48px] w-full items-center justify-center rounded-[3px] bg-[#183D2D] px-6 py-3 text-sm font-semibold text-[#F3EBDD] hover:bg-[#122f22] transition-colors"
                 >

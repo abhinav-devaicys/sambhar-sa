@@ -1,7 +1,12 @@
 import { FormEvent, useState } from 'react';
-import { ArrowUpRight, CheckCircle2, MessageSquareQuote } from 'lucide-react';
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  MessageSquareQuote,
+  Star,
+} from 'lucide-react';
 import { motion } from 'motion/react';
-import { BRAND, SIGNATURE_DISHES } from '../data/sambharsa';
+import { BRAND, CUSTOMER_REVIEWS, SIGNATURE_DISHES } from '../data/sambharsa';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -42,15 +47,15 @@ export function Testimonials() {
       className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-16 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Verified Google Reviews Lead Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, ease }}
-            className="lg:col-span-6"
-          >
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease }}
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#D5C4A3]/70"
+        >
+          <div className="max-w-2xl">
             <p className="text-xs sm:text-sm font-medium tracking-wide text-[#B63B32]">
               Guest Voices
             </p>
@@ -60,195 +65,226 @@ export function Testimonials() {
             >
               Good Food. Beautiful Memories.
             </h2>
-
-            <p className="mt-5 max-w-xl text-base sm:text-[17px] leading-[1.7] text-[#292821]/80">
-              We believe authentic hospitality speaks loudest through real
-              diners. Read verified reviews shared by guests who have dined at
-              SambharSa directly on Google Business.
+            <p className="mt-4 text-base sm:text-[17px] leading-[1.7] text-[#292821]/80">
+              Reflections from diners who experienced the warmth, hospitality,
+              and flavours of SambharSa, Gwalior.
             </p>
+          </div>
 
-            {/* Unfabricated Editorial Review Highlights */}
-            <div className="mt-8 border-t border-[#D5C4A3]/70 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <h3 className="font-serif text-lg text-[#183D2D]">
-                  Verified Google Profile
-                </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#292821]/75">
-                  Browse genuine guest photos, ratings, and dining stories on
-                  our Google Business listing.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-serif text-lg text-[#183D2D]">
-                  Freshly Made to Order
-                </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#292821]/75">
-                  From crisp ghee roast dosas to steaming idlis, every dish is
-                  plated hot at your table.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href={BRAND.googleReviewsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex min-h-[48px] items-center justify-center gap-2.5 bg-[#183D2D] px-6 py-3 text-sm font-semibold text-[#F3EBDD] transition-all duration-200 hover:bg-[#122f22] hover:-translate-y-0.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
-              >
-                <span>Read Google Business Reviews</span>
-                <ArrowUpRight
-                  className="w-4 h-4 text-[#E7B928] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
-                />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Interactive Guestbook / Feedback Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, delay: 0.1, ease }}
-            className="lg:col-span-6 border border-[#D5C4A3] bg-[#F3EBDD] p-6 sm:p-8 lg:p-10"
+          <a
+            href={BRAND.googleReviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex min-h-[46px] self-start lg:self-auto items-center justify-center gap-2.5 border border-[#183D2D]/35 px-6 py-2.5 text-sm font-semibold text-[#183D2D] transition-all duration-200 hover:border-[#183D2D] hover:bg-[#183D2D] hover:text-[#F3EBDD] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
           >
-            <div className="flex items-start justify-between gap-4 pb-5 border-b border-[#D5C4A3]/70">
-              <div>
-                <h3 className="font-serif text-2xl text-[#183D2D]">
-                  Share Your Table Note
-                </h3>
-                <p className="mt-1 text-sm text-[#292821]/70">
-                  Recently dined at SambharSa Gwalior? Leave a note about your
-                  favourite dish.
-                </p>
-              </div>
-              <MessageSquareQuote
-                className="w-6 h-6 text-[#183D2D]/60 shrink-0"
-                strokeWidth={1.5}
-                aria-hidden="true"
-              />
-            </div>
+            <span>Read Google Business Reviews</span>
+            <ArrowUpRight
+              className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            />
+          </a>
+        </motion.div>
 
-            {submittedNote ? (
-              <div className="py-8">
-                <div className="flex items-center gap-2.5 text-[#183D2D]">
-                  <CheckCircle2 className="w-5 h-5 shrink-0" aria-hidden="true" />
-                  <span className="font-serif text-xl">
-                    Thank you, {submittedNote.name}.
+        {/* Authentic Customer Feedback Grid */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {CUSTOMER_REVIEWS.map((review, index) => (
+            <motion.article
+              key={review.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, delay: index * 0.1, ease }}
+              className="flex flex-col justify-between border border-[#D5C4A3] bg-[#F3EBDD] p-7 sm:p-9 lg:p-10"
+            >
+              <div>
+                {/* Five-Star Rating Display */}
+                <div
+                  className="flex items-center justify-between gap-4"
+                  aria-label={`${review.rating} out of 5 stars`}
+                >
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: review.rating }).map((_, starIdx) => (
+                      <Star
+                        key={starIdx}
+                        className="w-4 h-4 fill-[#E7B928] text-[#E7B928]"
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <span className="text-xs font-medium tabular-nums text-[#292821]/65">
+                    {review.rating}.0 / 5
                   </span>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-[#292821]/80">
-                  Your note for{' '}
-                  <span className="font-semibold text-[#183D2D]">
-                    {submittedNote.dish}
-                  </span>{' '}
-                  has been recorded for this session. We also welcome you to
-                  post your review on Google Maps to help fellow diners in
-                  Gwalior.
-                </p>
-                <blockquote className="mt-4 border border-[#D5C4A3] bg-[#D5C4A3]/20 p-4 text-sm italic text-[#292821]/85">
-                  &ldquo;{submittedNote.note}&rdquo;
+
+                <blockquote className="mt-6 font-serif text-xl sm:text-[1.35rem] leading-[1.55] text-[#183D2D]">
+                  &ldquo;{review.quote}&rdquo;
                 </blockquote>
-                <div className="mt-6 flex flex-wrap items-center gap-4">
-                  <a
-                    href={BRAND.googleReviewsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] items-center gap-2 bg-[#183D2D] px-5 py-2.5 text-sm font-medium text-[#F3EBDD] hover:bg-[#122f22] transition-colors"
-                  >
-                    <span>Share on Google Maps</span>
-                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => setSubmittedNote(null)}
-                    className="min-h-[44px] px-4 py-2 text-sm font-medium text-[#183D2D] underline underline-offset-4 hover:text-[#B63B32] cursor-pointer"
-                  >
-                    Write another note
-                  </button>
-                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-6 space-y-5" noValidate>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <footer className="mt-8 pt-4 border-t border-[#D5C4A3]/60 flex items-center justify-between gap-4 text-sm">
+                <span className="font-semibold text-[#292821]">
+                  {review.author}
+                </span>
+                <span className="text-xs text-[#292821]/65">
+                  SambharSa Guest · Gwalior
+                </span>
+              </footer>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* Share Your Table Note Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.12, ease }}
+          className="mt-12 border border-[#D5C4A3] bg-[#D5C4A3]/15 p-6 sm:p-8 lg:p-10"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-2.5 text-[#183D2D]">
+                <MessageSquareQuote
+                  className="w-5 h-5 text-[#B63B32] shrink-0"
+                  strokeWidth={1.6}
+                  aria-hidden="true"
+                />
+                <span className="text-xs font-semibold tracking-wide text-[#B63B32]">
+                  Guestbook
+                </span>
+              </div>
+              <h3 className="mt-2 font-serif text-2xl sm:text-3xl text-[#183D2D]">
+                Share Your Table Note
+              </h3>
+              <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#292821]/75">
+                Recently dined at SambharSa Gwalior? Leave a note about your
+                favourite dish or share your experience on Google Maps.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7">
+              {submittedNote ? (
+                <div className="py-2">
+                  <div className="flex items-center gap-2.5 text-[#183D2D]">
+                    <CheckCircle2
+                      className="w-5 h-5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="font-serif text-xl">
+                      Thank you, {submittedNote.name}.
+                    </span>
+                  </div>
+                  <p className="mt-2.5 text-sm leading-relaxed text-[#292821]/80">
+                    Your note for{' '}
+                    <span className="font-semibold text-[#183D2D]">
+                      {submittedNote.dish}
+                    </span>{' '}
+                    has been recorded for this session. We also invite you to
+                    post your review on Google Maps.
+                  </p>
+                  <blockquote className="mt-4 border border-[#D5C4A3] bg-[#F3EBDD] p-4 text-sm italic text-[#292821]/85">
+                    &ldquo;{submittedNote.note}&rdquo;
+                  </blockquote>
+                  <div className="mt-5 flex flex-wrap items-center gap-4">
+                    <a
+                      href={BRAND.googleReviewsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] items-center gap-2 bg-[#183D2D] px-5 py-2.5 text-sm font-medium text-[#F3EBDD] hover:bg-[#122f22] transition-colors"
+                    >
+                      <span>Share on Google Maps</span>
+                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setSubmittedNote(null)}
+                      className="min-h-[44px] px-4 py-2 text-sm font-medium text-[#183D2D] underline underline-offset-4 hover:text-[#B63B32] cursor-pointer"
+                    >
+                      Write another note
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="guest-name"
+                        className="block text-xs font-semibold tracking-wide text-[#292821]/80 mb-1.5"
+                      >
+                        Your Name
+                      </label>
+                      <input
+                        id="guest-name"
+                        type="text"
+                        value={guestName}
+                        onChange={(e) => setGuestName(e.target.value)}
+                        placeholder="e.g. Ananya"
+                        className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="favourite-dish"
+                        className="block text-xs font-semibold tracking-wide text-[#292821]/80 mb-1.5"
+                      >
+                        Favourite Dish
+                      </label>
+                      <select
+                        id="favourite-dish"
+                        value={favouriteDish}
+                        onChange={(e) => setFavouriteDish(e.target.value)}
+                        className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] focus:border-[#183D2D] focus:outline-none"
+                      >
+                        {SIGNATURE_DISHES.map((dish) => (
+                          <option key={dish.id} value={dish.name}>
+                            {dish.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
                   <div>
                     <label
-                      htmlFor="guest-name"
+                      htmlFor="guest-note"
                       className="block text-xs font-semibold tracking-wide text-[#292821]/80 mb-1.5"
                     >
-                      Your Name
+                      Your Dining Memory
                     </label>
-                    <input
-                      id="guest-name"
-                      type="text"
-                      value={guestName}
-                      onChange={(e) => setGuestName(e.target.value)}
-                      placeholder="e.g. Aarav"
-                      className="w-full min-h-[44px] border border-[#D5C4A3] bg-white/55 px-3.5 py-2.5 text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none"
+                    <textarea
+                      id="guest-note"
+                      rows={2}
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                      placeholder="What stood out during your visit?"
+                      className="w-full border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none resize-none"
                     />
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="favourite-dish"
-                      className="block text-xs font-semibold tracking-wide text-[#292821]/80 mb-1.5"
+                  {formError && (
+                    <p
+                      role="alert"
+                      className="text-xs font-medium text-[#B63B32]"
                     >
-                      Favourite Dish
-                    </label>
-                    <select
-                      id="favourite-dish"
-                      value={favouriteDish}
-                      onChange={(e) => setFavouriteDish(e.target.value)}
-                      className="w-full min-h-[44px] border border-[#D5C4A3] bg-white/55 px-3.5 py-2.5 text-sm text-[#292821] focus:border-[#183D2D] focus:outline-none"
+                      {formError}
+                    </p>
+                  )}
+
+                  <div className="flex justify-end pt-1">
+                    <button
+                      type="submit"
+                      className="min-h-[44px] bg-[#183D2D] px-6 py-2.5 text-sm font-medium text-[#F3EBDD] transition-colors hover:bg-[#122f22] cursor-pointer whitespace-nowrap shrink-0"
                     >
-                      {SIGNATURE_DISHES.map((dish) => (
-                        <option key={dish.id} value={dish.name}>
-                          {dish.name}
-                        </option>
-                      ))}
-                    </select>
+                      Submit Note
+                    </button>
                   </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="guest-note"
-                    className="block text-xs font-semibold tracking-wide text-[#292821]/80 mb-1.5"
-                  >
-                    Your Dining Memory
-                  </label>
-                  <textarea
-                    id="guest-note"
-                    rows={3}
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
-                    placeholder="What stood out during your visit?"
-                    className="w-full border border-[#D5C4A3] bg-white/55 px-3.5 py-2.5 text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none resize-none"
-                  />
-                </div>
-
-                {formError && (
-                  <p role="alert" className="text-xs font-medium text-[#B63B32]">
-                    {formError}
-                  </p>
-                )}
-
-                <div className="flex items-center justify-between gap-4 pt-1">
-                  <span className="text-xs text-[#292821]/60">
-                    No fabricated reviews are shown on this site.
-                  </span>
-                  <button
-                    type="submit"
-                    className="min-h-[44px] bg-[#183D2D] px-6 py-2.5 text-sm font-medium text-[#F3EBDD] transition-colors hover:bg-[#122f22] cursor-pointer whitespace-nowrap shrink-0"
-                  >
-                    Submit Note
-                  </button>
-                </div>
-              </form>
-            )}
-          </motion.div>
-        </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

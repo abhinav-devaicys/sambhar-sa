@@ -5,7 +5,8 @@ import dishGheePodiImg from '@/src/assets/images/dish_ghee_podi_1794675351536.jp
 import dishIdliVadaImg from '@/src/assets/images/dish_idli_vada_1794675350707.jpg';
 import dishLemonRiceImg from '@/src/assets/images/dish_lemon_rice_1794675351884.jpg';
 import cultureSpiceDetailsImg from '@/src/assets/images/culture_spice_details_1794675351708.jpg';
-import diningExperienceTableImg from '@/src/assets/images/dining_experience_table_1794675352647.jpg';
+import diningExperienceInteriorImg from '@/unnamed.webp';
+import storefrontEveningImg from '@/unnamed (1).webp';
 
 export type MenuCategory =
   | 'All'
@@ -32,6 +33,30 @@ export interface CraftDetail {
   description: string;
 }
 
+export interface CustomerReview {
+  id: string;
+  author: string;
+  rating: number;
+  quote: string;
+}
+
+export const CUSTOMER_REVIEWS: CustomerReview[] = [
+  {
+    id: 'ananya-r',
+    author: 'Ananya R.',
+    rating: 5,
+    quote:
+      'The authentic flavors of the South brought right to the heart of Gwalior. Every dish, especially the sambhar, feels like a warm embrace from a traditional home kitchen. A truly sophisticated and premium dining experience.',
+  },
+  {
+    id: 'vikram-s',
+    author: 'Vikram S.',
+    rating: 5,
+    quote:
+      'Finally, a South Indian spot that gets the balance between modern elegance and genuine cultural roots right. The ambiance is as refined as the menu. Highly recommended for anyone chasing the true flavors of the South.',
+  },
+];
+
 export const BRAND = {
   name: 'SambharSa',
   city: 'Gwalior',
@@ -40,16 +65,14 @@ export const BRAND = {
     '5, DRDE Road, Jhansi Road, opposite Food Corporation of India Godown, Gwalior, Madhya Pradesh, India',
   shortAddress: '5, DRDE Road, Jhansi Road, Opp. FCI Godown, Gwalior',
   landmark: 'Opposite Food Corporation of India Godown, Jhansi Road',
-  googleMapsUrl:
-    'https://www.google.com/maps/search/?api=1&query=5,+DRDE+Road,+Jhansi+Road,+opposite+Food+Corporation+of+India+Godown,+Gwalior,+Madhya+Pradesh,+India',
+  googleMapsUrl: 'https://maps.app.goo.gl/Md3Dhve5co6axZuV7',
   googleReviewsUrl:
     'https://www.google.com/maps/search/?api=1&query=SambharSa+Gwalior+DRDE+Road',
-  storefrontImage:
-    '/assets/aistudio/sambhar-sa-nri-circle-jaipur-south-indian-restaurants-BT4V2Y5tNF_3e998c3e.webp',
+  storefrontImage: storefrontEveningImg,
   heroImage: heroMasalaDosaImg,
   storyImage: storyFilterCoffeeImg,
   cultureImage: cultureSpiceDetailsImg,
-  diningImage: diningExperienceTableImg,
+  diningImage: diningExperienceInteriorImg,
 };
 
 export const MENU_CATEGORIES: MenuCategory[] = [
@@ -165,21 +188,20 @@ export const CULINARY_DETAILS: CraftDetail[] = [
 export const EXPERIENCE_GALLERY = [
   {
     id: 'dining-room',
-    title: 'Warm Timber, Woven Light & Thali Spreads',
-    caption: 'Unrushed tables crafted for family gatherings and everyday comfort.',
-    image: diningExperienceTableImg,
+    title: 'Warm Timber, Cane Seating & Woven Light',
+    caption: 'Unhurried tables crafted for family gatherings and everyday comfort.',
+    image: diningExperienceInteriorImg,
     imageAlt:
-      'Warm South Indian dining room with woven rattan pendant lamps, teak tables, and banana-leaf dishes',
+      'Authentic SambharSa dining room interior with woven cane pendant lights, rich timber beams, wooden tables with cane chairs, and South Indian accents',
     span: 'large' as const,
   },
   {
     id: 'storefront',
-    title: 'The Signature SambharSa Identity',
-    caption: 'Vibrant turmeric yellow, deep forest green, and chilli red welcoming every guest.',
-    image:
-      '/assets/aistudio/sambhar-sa-nri-circle-jaipur-south-indian-restaurants-BT4V2Y5tNF_3e998c3e.webp',
+    title: 'Evening Welcome & Vanakkam Entry',
+    caption: 'Illuminated emerald signage, pure-vegetarian craft, and warm glass doors welcoming every guest.',
+    image: storefrontEveningImg,
     imageAlt:
-      'Official SambharSa illuminated yellow signboard with forest green and red lettering and warm rattan lighting inside',
+      'SambharSa evening storefront facade with illuminated green signage, Vanakkam doorway light, and warm interior dining room visible inside',
     span: 'side' as const,
   },
 ];
