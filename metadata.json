@@ -1,0 +1,6 @@
+{
+  "name": "SambharSa Gwalior",
+  "description": "Chasing Flavours of the South — Modern South Indian dining in Gwalior featuring crispy dosas, steamed idlis, aromatic sambhar, and traditional hospitality.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

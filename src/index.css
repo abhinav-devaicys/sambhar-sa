@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #F3EBDD;
+  --color-forest: #183D2D;
+  --color-turmeric: #E7B928;
+  --color-chilli: #B63B32;
+  --color-charcoal: #292821;
+  --color-sand: #D5C4A3;
+
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-devanagari: "Noto Serif Devanagari", serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #F3EBDD;
+    color: #292821;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
