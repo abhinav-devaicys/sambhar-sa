@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { Check, Compass, Copy, ExternalLink, MapPin } from 'lucide-react';
+import {
+  Check,
+  Compass,
+  Copy,
+  ExternalLink,
+  MapPin,
+  Phone,
+  Utensils,
+} from 'lucide-react';
 import { motion } from 'motion/react';
 import { BRAND } from '../data/sambharsa';
 
@@ -32,7 +40,7 @@ export function VisitUs() {
           >
             <div>
               <p className="text-xs sm:text-sm font-medium tracking-wide text-[#B63B32]">
-                Visit SambharSa · Gwalior
+                Visit {BRAND.name} · {BRAND.city}
               </p>
               <h2
                 className="mt-3 font-serif text-[#183D2D] leading-[1.08] tracking-tight"
@@ -44,7 +52,7 @@ export function VisitUs() {
                 Come experience the flavours of the South at SambharSa, Gwalior.
               </p>
 
-              {/* Verified Location Block */}
+              {/* Verified Location, Phone & Services Block */}
               <div className="mt-9 border-t border-[#D5C4A3] pt-7 space-y-6">
                 <div className="flex items-start gap-3.5">
                   <MapPin
@@ -58,6 +66,41 @@ export function VisitUs() {
                     <address className="not-italic mt-1.5 font-serif text-xl sm:text-2xl leading-snug text-[#183D2D]">
                       {BRAND.address}
                     </address>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-3.5">
+                    <Phone
+                      className="w-5 h-5 text-[#183D2D] mt-0.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <h3 className="font-sans text-xs font-semibold tracking-wide text-[#292821]/65">
+                        Contact Number
+                      </h3>
+                      <a
+                        href={BRAND.phoneHref}
+                        className="mt-1 inline-block font-serif text-xl text-[#183D2D] hover:text-[#B63B32] transition-colors tabular-nums"
+                      >
+                        {BRAND.phone}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3.5">
+                    <Utensils
+                      className="w-5 h-5 text-[#183D2D] mt-0.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <h3 className="font-sans text-xs font-semibold tracking-wide text-[#292821]/65">
+                        Available Services
+                      </h3>
+                      <p className="mt-1 text-sm sm:text-base font-medium text-[#292821]/85">
+                        {BRAND.services.join(' · ')}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -80,29 +123,37 @@ export function VisitUs() {
             </div>
 
             {/* Working Actions */}
-            <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-3.5">
+            <div className="mt-9 flex flex-wrap items-center gap-3.5">
               <a
                 href={BRAND.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2.5 bg-[#183D2D] px-7 py-3 text-sm font-semibold text-[#F3EBDD] transition-all duration-200 hover:bg-[#122f22] hover:-translate-y-0.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2.5 bg-[#183D2D] px-6 py-3 text-sm font-semibold text-[#F3EBDD] transition-all duration-200 hover:bg-[#122f22] hover:-translate-y-0.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
               >
-                <span>Get Directions on Google Maps</span>
+                <span>Get Directions</span>
                 <ExternalLink
                   className="w-4 h-4 text-[#E7B928]"
                   aria-hidden="true"
                 />
               </a>
 
+              <a
+                href={BRAND.phoneHref}
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D] px-6 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:bg-[#183D2D] hover:text-[#F3EBDD] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+              >
+                <Phone className="w-4 h-4" aria-hidden="true" />
+                <span>Call Now</span>
+              </a>
+
               <button
                 type="button"
                 onClick={handleCopyAddress}
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D]/35 px-6 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:border-[#183D2D] hover:bg-[#183D2D]/5 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D]/35 px-5 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:border-[#183D2D] hover:bg-[#183D2D]/5 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
               >
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-[#183D2D]" aria-hidden="true" />
-                    <span>Address Copied</span>
+                    <span>Copied</span>
                   </>
                 ) : (
                   <>

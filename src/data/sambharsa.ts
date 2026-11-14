@@ -1,7 +1,6 @@
 import heroMasalaDosaImg from '@/src/assets/images/hero_masala_dosa_1794675349619.jpg';
 import storyFilterCoffeeImg from '@/src/assets/images/story_filter_coffee_1794675350193.jpg';
 import dishGheeRoastImg from '@/src/assets/images/dish_ghee_roast_1794675349829.jpg';
-import dishGheePodiImg from '@/src/assets/images/dish_ghee_podi_1794675351536.jpg';
 import dishIdliVadaImg from '@/src/assets/images/dish_idli_vada_1794675350707.jpg';
 import dishLemonRiceImg from '@/src/assets/images/dish_lemon_rice_1794675351884.jpg';
 import cultureSpiceDetailsImg from '@/src/assets/images/culture_spice_details_1794675351708.jpg';
@@ -11,20 +10,32 @@ import storefrontEveningImg from '@/unnamed (1).webp';
 export type MenuCategory =
   | 'All'
   | 'Dosa'
-  | 'Idli & Vada'
-  | 'Rice Specialities'
+  | 'Fusion Dosa'
+  | 'South Indian Specials'
+  | 'Rice'
+  | 'Desserts'
   | 'Beverages';
+
+export type MenuCategoryKey = Exclude<MenuCategory, 'All'>;
 
 export interface DishItem {
   id: string;
   name: string;
-  category: Exclude<MenuCategory, 'All'>;
+  category: MenuCategoryKey;
   description: string;
   accompaniments: string;
   dietary: 'Pure Veg';
   image: string;
   imageAlt: string;
-  featured?: boolean;
+}
+
+export interface MenuCategoryGroup {
+  category: MenuCategoryKey;
+  subtitle: string;
+  items: {
+    name: string;
+    note?: string;
+  }[];
 }
 
 export interface CraftDetail {
@@ -60,11 +71,18 @@ export const CUSTOMER_REVIEWS: CustomerReview[] = [
 export const BRAND = {
   name: 'SambharSa',
   city: 'Gwalior',
-  tagline: 'Chasing Flavours of the South!',
+  businessType: 'South Indian Vegetarian Restaurant',
+  cuisine: 'Authentic South Indian cuisine',
+  tagline: 'Chasing Flavours Of The South!',
   address:
-    '5, DRDE Road, Jhansi Road, opposite Food Corporation of India Godown, Gwalior, Madhya Pradesh, India',
-  shortAddress: '5, DRDE Road, Jhansi Road, Opp. FCI Godown, Gwalior',
+    '5, DRDE Road, Jhansi Road, Opposite Food Corporation of India Godown, Gwalior, Madhya Pradesh – 474002, India.',
+  shortAddress: '5, DRDE Road, Jhansi Road, Opp. FCI Godown, Gwalior – 474002',
   landmark: 'Opposite Food Corporation of India Godown, Jhansi Road',
+  phone: '+91 96853 93184',
+  phoneHref: 'tel:+919685393184',
+  services: ['Dine-in', 'Takeaway', 'Home Delivery'] as const,
+  googleRating: 4.7,
+  googleReviewCount: '668+',
   googleMapsUrl: 'https://maps.app.goo.gl/Md3Dhve5co6axZuV7',
   googleReviewsUrl:
     'https://www.google.com/maps/search/?api=1&query=SambharSa+Gwalior+DRDE+Road',
@@ -78,8 +96,10 @@ export const BRAND = {
 export const MENU_CATEGORIES: MenuCategory[] = [
   'All',
   'Dosa',
-  'Idli & Vada',
-  'Rice Specialities',
+  'Fusion Dosa',
+  'South Indian Specials',
+  'Rice',
+  'Desserts',
   'Beverages',
 ];
 
@@ -95,11 +115,10 @@ export const SIGNATURE_DISHES: DishItem[] = [
     image: heroMasalaDosaImg,
     imageAlt:
       'Golden crisp Masala Dosa served on a fresh banana leaf with brass bowls of sambhar and chutneys',
-    featured: true,
   },
   {
-    id: 'ghee-roast-dosa',
-    name: 'Ghee Roast Dosa',
+    id: 'ghee-roast',
+    name: 'Ghee Roast',
     category: 'Dosa',
     description:
       'Paper-thin, lacy crepe roasted slowly with aromatic clarified butter until crisp and deeply caramelised along every fold.',
@@ -107,39 +126,24 @@ export const SIGNATURE_DISHES: DishItem[] = [
     dietary: 'Pure Veg',
     image: dishGheeRoastImg,
     imageAlt:
-      'Crisp golden cone-shaped Ghee Roast Dosa on a banana leaf beside coconut chutney and steaming sambhar',
-    featured: true,
+      'Crisp golden cone-shaped Ghee Roast dosa on a banana leaf beside coconut chutney and steaming sambhar',
   },
   {
-    id: 'ghee-podi-dosa',
-    name: 'Ghee Podi Dosa',
-    category: 'Dosa',
+    id: 'idli-vada',
+    name: 'Idli & Vada',
+    category: 'South Indian Specials',
     description:
-      'A crisp South Indian classic generously finished with house-roasted lentil gun-powder spice blend and pure ghee.',
-    accompaniments: 'Served with white coconut & spiced tomato chutneys',
-    dietary: 'Pure Veg',
-    image: dishGheePodiImg,
-    imageAlt:
-      'Ghee Podi Dosa coated in roasted spiced lentil podi on a fresh banana leaf with brass bowls',
-    featured: true,
-  },
-  {
-    id: 'idli-medu-vada',
-    name: 'Steamed Idli & Medu Vada',
-    category: 'Idli & Vada',
-    description:
-      'Pillowy steamed rice cakes paired with crisp, golden urad dal fritters seasoned with whole black peppercorns and fresh curry leaves.',
+      'Pillowy steamed rice cakes alongside crisp, golden urad dal fritters seasoned with whole black peppercorns and fresh curry leaves.',
     accompaniments: 'Served steaming with vegetable sambhar & twin chutneys',
     dietary: 'Pure Veg',
     image: dishIdliVadaImg,
     imageAlt:
-      'Soft steamed white idlis and crisp golden medu vada on a banana leaf with brass bowls of sambhar',
-    featured: true,
+      'Soft steamed white idlis and crisp golden vada on a banana leaf with brass bowls of sambhar',
   },
   {
     id: 'lemon-rice',
     name: 'Lemon Rice',
-    category: 'Rice Specialities',
+    category: 'Rice',
     description:
       'Fluffy steamed rice tossed with fragrant turmeric, fresh lemon juice, crackled black mustard seeds, chana dal, dried red chillies, and roasted cashews.',
     accompaniments: 'Finished with fresh curry leaf tempering',
@@ -147,20 +151,74 @@ export const SIGNATURE_DISHES: DishItem[] = [
     image: dishLemonRiceImg,
     imageAlt:
       'Vibrant turmeric-yellow Lemon Rice garnished with roasted cashews, mustard seeds, and curry leaves',
-    featured: true,
+  },
+];
+
+export const FULL_MENU: MenuCategoryGroup[] = [
+  {
+    category: 'Dosa',
+    subtitle: 'Crisp fermented crepes griddled fresh to order',
+    items: [
+      { name: 'Sada Dosa', note: 'Classic crisp golden crepe' },
+      { name: 'Masala Dosa', note: 'Spiced potato masala filling' },
+      { name: 'Mysore Dosa', note: 'Red chilli-garlic chutney spread' },
+      { name: 'Rawa Dosa', note: 'Lacy semolina crepe with pepper & cumin' },
+      { name: 'Benne Masala Dosa', note: 'Rich butter-roasted with spiced potato' },
+      { name: 'Ghee Roast', note: 'Caramelised in pure clarified butter' },
+    ],
   },
   {
-    id: 'filter-coffee',
-    name: 'South Indian Filter Coffee',
+    category: 'Fusion Dosa',
+    subtitle: 'Playful contemporary twists on the traditional griddle',
+    items: [
+      { name: 'Jinni Dosa', note: 'Savory vegetable & cheese medley' },
+      { name: 'Pav Bhaji Dosa', note: 'Spiced mashed vegetable bhaji filling' },
+      { name: 'Peri Peri Cheese Dosa', note: 'Zesty peri peri seasoning & melted cheese' },
+      { name: 'Peri Peri Paneer Dosa', note: 'Spiced cottage cheese & peri peri blend' },
+    ],
+  },
+  {
+    category: 'South Indian Specials',
+    subtitle: 'Comforting classics from morning tiffin to hearty bowls',
+    items: [
+      { name: 'Idli', note: 'Steamed fluffy fermented rice cakes' },
+      { name: 'Vada', note: 'Crisp savoury urad dal lentil fritters' },
+      { name: 'Paniyaram', note: 'Golden pan-roasted spiced batter dumplings' },
+      { name: 'Upma', note: 'Roasted semolina tempered with curry leaves' },
+      { name: 'Poori Kurma', note: 'Puffed golden pooris with spiced vegetable kurma' },
+      { name: 'Bisi Bele Bath', note: 'Warm spiced lentil, rice & vegetable stew' },
+    ],
+  },
+  {
+    category: 'Rice',
+    subtitle: 'Aromatic tempered rice specialities',
+    items: [
+      { name: 'Lemon Rice', note: 'Turmeric, fresh lemon & roasted cashews' },
+      { name: 'Tomato Rice', note: 'Tangy slow-simmered tomato & spice tempering' },
+      { name: 'Curd Rice', note: 'Cooling yogurt rice finished with mustard & curry leaves' },
+      { name: 'Ghee Rice', note: 'Fragrant rice infused with pure ghee & whole spices' },
+    ],
+  },
+  {
+    category: 'Desserts',
+    subtitle: 'Traditional slow-set Indian kulfis',
+    items: [
+      { name: 'Malai Kulfi', note: 'Rich classic reduced-milk kulfi' },
+      { name: 'Kesar Pista Kulfi', note: 'Saffron threads & roasted pistachios' },
+      { name: 'Mango Kulfi', note: 'Sweet summer mango creaminess' },
+      { name: 'Maharaja Kulfi', note: 'Festive royal nut & cardamom blend' },
+      { name: 'Jamun Kulfi', note: 'Vibrant tangy-sweet jamun berry kulfi' },
+    ],
+  },
+  {
     category: 'Beverages',
-    description:
-      'Slow-brewed decoction whisked with hot frothed milk and poured high in a traditional brass davara tumbler for an aromatic finish.',
-    accompaniments: 'Freshly brewed to order',
-    dietary: 'Pure Veg',
-    image: storyFilterCoffeeImg,
-    imageAlt:
-      'Traditional brass davara and tumbler pouring frothy steaming South Indian filter coffee',
-    featured: true,
+    subtitle: 'Refreshing traditional coolers & spiced drinks',
+    items: [
+      { name: 'Aam Panna', note: 'Spiced roasted raw mango cooler' },
+      { name: 'Kokum Sherbet', note: 'Tangy coastal kokum & cumin infusion' },
+      { name: 'Panakam', note: 'Traditional jaggery, cardamom & ginger drink' },
+      { name: 'Tadka Pudina Chaas', note: 'Tempered mint spiced buttermilk' },
+    ],
   },
 ];
 

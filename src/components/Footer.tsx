@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin } from 'lucide-react';
+import { ArrowUpRight, MapPin, Phone } from 'lucide-react';
 import { motion } from 'motion/react';
 import { BRAND } from '../data/sambharsa';
 import { BrandMark } from './BrandMark';
@@ -31,9 +31,12 @@ export function Footer() {
               <BrandMark variant="light" showTagline />
             </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#D5C4A3]">
-              A contemporary South Indian dining experience in Gwalior
-              celebrating crispy dosas, slow-simmered sambhar, freshly ground
-              chutneys, and warm hospitality.
+              {BRAND.businessType} in Gwalior celebrating authentic South
+              Indian cuisine, crispy dosas, slow-simmered sambhar, and warm
+              hospitality.
+            </p>
+            <p className="mt-3 text-xs font-medium text-[#E7B928]">
+              {BRAND.services.join(' · ')}
             </p>
           </div>
 
@@ -70,6 +73,19 @@ export function Footer() {
                 aria-hidden="true"
               />
               <address className="not-italic">{BRAND.address}</address>
+            </div>
+
+            <div className="mt-3.5 flex items-center gap-2.5 text-sm text-[#F3EBDD]/85">
+              <Phone
+                className="w-4 h-4 text-[#E7B928] shrink-0"
+                aria-hidden="true"
+              />
+              <a
+                href={BRAND.phoneHref}
+                className="hover:text-[#E7B928] transition-colors tabular-nums"
+              >
+                {BRAND.phone}
+              </a>
             </div>
 
             <div className="mt-5 flex flex-wrap gap-4">

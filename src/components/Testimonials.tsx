@@ -6,7 +6,7 @@ import {
   Star,
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { BRAND, CUSTOMER_REVIEWS, SIGNATURE_DISHES } from '../data/sambharsa';
+import { BRAND, CUSTOMER_REVIEWS, FULL_MENU, SIGNATURE_DISHES } from '../data/sambharsa';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -237,10 +237,14 @@ export function Testimonials() {
                         onChange={(e) => setFavouriteDish(e.target.value)}
                         className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] focus:border-[#183D2D] focus:outline-none"
                       >
-                        {SIGNATURE_DISHES.map((dish) => (
-                          <option key={dish.id} value={dish.name}>
-                            {dish.name}
-                          </option>
+                        {FULL_MENU.map((group) => (
+                          <optgroup key={group.category} label={group.category}>
+                            {group.items.map((item) => (
+                              <option key={item.name} value={item.name}>
+                                {item.name}
+                              </option>
+                            ))}
+                          </optgroup>
                         ))}
                       </select>
                     </div>
