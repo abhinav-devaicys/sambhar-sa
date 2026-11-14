@@ -1,42 +1,41 @@
 import { motion } from 'motion/react';
 import { BRAND } from '../data/sambharsa';
+import { EASE_EDITORIAL, VIEWPORT_REVEAL } from '../lib/motion';
 import { ResilientImage } from './ResilientImage';
-
-const ease = [0.16, 1, 0.3, 1] as const;
 
 export function BrandStory() {
   return (
     <section
       id="our-story"
-      className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-16 sm:py-24 lg:py-28"
+      className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-14 sm:py-20 lg:py-28"
     >
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-16">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 sm:gap-10 lg:gap-16">
           {/* Portrait Visual Column */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.65, ease }}
-            className="lg:col-span-5 order-2 lg:order-1"
+            viewport={VIEWPORT_REVEAL}
+            transition={{ duration: 0.52, ease: EASE_EDITORIAL }}
+            className="lg:col-span-5 order-2 lg:order-1 transform-gpu"
           >
-            <div className="relative overflow-hidden bg-[#D5C4A3]/30 aspect-[3/4] max-w-md mx-auto lg:max-w-none">
+            <div className="relative overflow-hidden bg-[#D5C4A3]/30 aspect-[4/5] sm:aspect-[3/4] max-w-sm sm:max-w-md mx-auto lg:max-w-none">
               <ResilientImage
                 src={BRAND.storyImage}
                 alt="Traditional South Indian brass davara and tumbler pouring frothy filter coffee beside fresh curry leaves"
                 fallbackTitle="Traditional Brass Filter Coffee"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                className="h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
               />
             </div>
           </motion.div>
 
           {/* Editorial Narrative Column */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.65, delay: 0.1, ease }}
-            className="lg:col-span-7 order-1 lg:order-2 lg:pl-6"
+            viewport={VIEWPORT_REVEAL}
+            transition={{ duration: 0.52, delay: 0.08, ease: EASE_EDITORIAL }}
+            className="lg:col-span-7 order-1 lg:order-2 lg:pl-6 transform-gpu"
           >
             <div className="flex items-center gap-3 text-xs sm:text-sm font-medium text-[#183D2D]">
               <span>Our Story</span>
@@ -53,8 +52,8 @@ export function BrandStory() {
             </div>
 
             <h2
-              className="mt-4 font-serif text-[#183D2D] leading-[1.12] tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 3.3vw, 3.25rem)' }}
+              className="mt-3 sm:mt-4 font-serif text-[#183D2D] leading-[1.12] tracking-tight"
+              style={{ fontSize: 'clamp(1.85rem, 3.3vw, 3.25rem)' }}
             >
               More Than A Meal. A Journey Through The South.
             </h2>

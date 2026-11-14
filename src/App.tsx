@@ -4,6 +4,7 @@
  */
 
 import { MotionConfig } from 'motion/react';
+import { EASE_EDITORIAL } from './lib/motion';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { BrandStory } from './components/BrandStory';
@@ -16,7 +17,10 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <MotionConfig reducedMotion="user">
+    <MotionConfig
+      reducedMotion="user"
+      transition={{ duration: 0.5, ease: EASE_EDITORIAL }}
+    >
       <div className="min-h-screen bg-[#F3EBDD] text-[#292821] flex flex-col">
         <Navbar />
         <main className="flex-1">

@@ -5,10 +5,9 @@ import {
   MessageSquareQuote,
   Star,
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { BRAND, CUSTOMER_REVIEWS, FULL_MENU, SIGNATURE_DISHES } from '../data/sambharsa';
-
-const ease = [0.16, 1, 0.3, 1] as const;
+import { EASE_EDITORIAL, VIEWPORT_REVEAL } from '../lib/motion';
 
 export function Testimonials() {
   const [guestName, setGuestName] = useState('');
@@ -44,16 +43,16 @@ export function Testimonials() {
   return (
     <section
       id="reviews"
-      className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-16 sm:py-24 lg:py-28"
+      className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-14 sm:py-20 lg:py-28"
     >
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-14">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6, ease }}
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#D5C4A3]/70"
+          viewport={VIEWPORT_REVEAL}
+          transition={{ duration: 0.5, ease: EASE_EDITORIAL }}
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 sm:gap-6 pb-8 sm:pb-10 border-b border-[#D5C4A3]/70 transform-gpu"
         >
           <div className="max-w-2xl">
             <p className="text-xs sm:text-sm font-medium tracking-wide text-[#B63B32]">
@@ -61,7 +60,7 @@ export function Testimonials() {
             </p>
             <h2
               className="mt-3 font-serif text-[#183D2D] leading-[1.1] tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 3.3vw, 3.25rem)' }}
+              style={{ fontSize: 'clamp(1.85rem, 3.3vw, 3.25rem)' }}
             >
               Good Food. Beautiful Memories.
             </h2>
@@ -75,26 +74,26 @@ export function Testimonials() {
             href={BRAND.googleReviewsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex min-h-[46px] self-start lg:self-auto items-center justify-center gap-2.5 border border-[#183D2D]/35 px-6 py-2.5 text-sm font-semibold text-[#183D2D] transition-all duration-200 hover:border-[#183D2D] hover:bg-[#183D2D] hover:text-[#F3EBDD] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+            className="group inline-flex min-h-[46px] self-start lg:self-auto items-center justify-center gap-2.5 border border-[#183D2D]/35 px-6 py-2.5 text-sm font-semibold text-[#183D2D] transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.2,0,0,1)] hover:border-[#183D2D] hover:bg-[#183D2D] hover:text-[#F3EBDD] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
           >
             <span>Read Google Business Reviews</span>
             <ArrowUpRight
-              className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="w-4 h-4 transform-gpu transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               aria-hidden="true"
             />
           </a>
         </motion.div>
 
         {/* Authentic Customer Feedback Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {CUSTOMER_REVIEWS.map((review, index) => (
             <motion.article
               key={review.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.55, delay: index * 0.1, ease }}
-              className="flex flex-col justify-between border border-[#D5C4A3] bg-[#F3EBDD] p-7 sm:p-9 lg:p-10"
+              viewport={VIEWPORT_REVEAL}
+              transition={{ duration: 0.48, delay: index * 0.08, ease: EASE_EDITORIAL }}
+              className="flex flex-col justify-between border border-[#D5C4A3] bg-[#F3EBDD] p-5 sm:p-8 lg:p-10 transform-gpu"
             >
               <div>
                 {/* Five-Star Rating Display */}
@@ -116,12 +115,12 @@ export function Testimonials() {
                   </span>
                 </div>
 
-                <blockquote className="mt-6 font-serif text-xl sm:text-[1.35rem] leading-[1.55] text-[#183D2D]">
+                <blockquote className="mt-5 sm:mt-6 font-serif text-lg sm:text-[1.35rem] leading-[1.55] text-[#183D2D]">
                   &ldquo;{review.quote}&rdquo;
                 </blockquote>
               </div>
 
-              <footer className="mt-8 pt-4 border-t border-[#D5C4A3]/60 flex items-center justify-between gap-4 text-sm">
+              <footer className="mt-6 sm:mt-8 pt-4 border-t border-[#D5C4A3]/60 flex flex-wrap items-center justify-between gap-2 text-sm">
                 <span className="font-semibold text-[#292821]">
                   {review.author}
                 </span>
@@ -135,11 +134,11 @@ export function Testimonials() {
 
         {/* Share Your Table Note Strip */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.12, ease }}
-          className="mt-12 border border-[#D5C4A3] bg-[#D5C4A3]/15 p-6 sm:p-8 lg:p-10"
+          viewport={VIEWPORT_REVEAL}
+          transition={{ duration: 0.5, delay: 0.08, ease: EASE_EDITORIAL }}
+          className="mt-8 sm:mt-12 border border-[#D5C4A3] bg-[#D5C4A3]/15 p-5 sm:p-8 lg:p-10 transform-gpu"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-5">
@@ -163,8 +162,16 @@ export function Testimonials() {
             </div>
 
             <div className="lg:col-span-7">
+              <AnimatePresence mode="wait" initial={false}>
               {submittedNote ? (
-                <div className="py-2">
+                <motion.div
+                  key="submitted-note"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: EASE_EDITORIAL }}
+                  className="py-2 transform-gpu"
+                >
                   <div className="flex items-center gap-2.5 text-[#183D2D]">
                     <CheckCircle2
                       className="w-5 h-5 shrink-0"
@@ -185,12 +192,12 @@ export function Testimonials() {
                   <blockquote className="mt-4 border border-[#D5C4A3] bg-[#F3EBDD] p-4 text-sm italic text-[#292821]/85">
                     &ldquo;{submittedNote.note}&rdquo;
                   </blockquote>
-                  <div className="mt-5 flex flex-wrap items-center gap-4">
+                  <div className="mt-5 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
                     <a
                       href={BRAND.googleReviewsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] items-center gap-2 bg-[#183D2D] px-5 py-2.5 text-sm font-medium text-[#F3EBDD] hover:bg-[#122f22] transition-colors"
+                      className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 bg-[#183D2D] px-5 py-2.5 text-sm font-medium text-[#F3EBDD] hover:bg-[#122f22] transition-colors"
                     >
                       <span>Share on Google Maps</span>
                       <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
@@ -198,14 +205,23 @@ export function Testimonials() {
                     <button
                       type="button"
                       onClick={() => setSubmittedNote(null)}
-                      className="min-h-[44px] px-4 py-2 text-sm font-medium text-[#183D2D] underline underline-offset-4 hover:text-[#B63B32] cursor-pointer"
+                      className="min-h-[44px] w-full sm:w-auto px-4 py-2 text-sm font-medium text-[#183D2D] underline underline-offset-4 hover:text-[#B63B32] cursor-pointer"
                     >
                       Write another note
                     </button>
                   </div>
-                </div>
+                </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                <motion.form
+                  key="guestbook-form"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: EASE_EDITORIAL }}
+                  onSubmit={handleSubmit}
+                  className="space-y-4 transform-gpu"
+                  noValidate
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -220,7 +236,7 @@ export function Testimonials() {
                         value={guestName}
                         onChange={(e) => setGuestName(e.target.value)}
                         placeholder="e.g. Ananya"
-                        className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none"
+                        className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-base sm:text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none"
                       />
                     </div>
 
@@ -235,7 +251,7 @@ export function Testimonials() {
                         id="favourite-dish"
                         value={favouriteDish}
                         onChange={(e) => setFavouriteDish(e.target.value)}
-                        className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] focus:border-[#183D2D] focus:outline-none"
+                        className="w-full min-h-[44px] border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-base sm:text-sm text-[#292821] focus:border-[#183D2D] focus:outline-none"
                       >
                         {FULL_MENU.map((group) => (
                           <optgroup key={group.category} label={group.category}>
@@ -263,7 +279,7 @@ export function Testimonials() {
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
                       placeholder="What stood out during your visit?"
-                      className="w-full border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none resize-none"
+                      className="w-full border border-[#D5C4A3] bg-[#F3EBDD] px-3.5 py-2.5 text-base sm:text-sm text-[#292821] placeholder:text-[#292821]/40 focus:border-[#183D2D] focus:outline-none resize-none"
                     />
                   </div>
 
@@ -279,13 +295,14 @@ export function Testimonials() {
                   <div className="flex justify-end pt-1">
                     <button
                       type="submit"
-                      className="min-h-[44px] bg-[#183D2D] px-6 py-2.5 text-sm font-medium text-[#F3EBDD] transition-colors hover:bg-[#122f22] cursor-pointer whitespace-nowrap shrink-0"
+                      className="min-h-[44px] w-full sm:w-auto bg-[#183D2D] px-6 py-2.5 text-sm font-medium text-[#F3EBDD] transition-colors duration-200 hover:bg-[#122f22] cursor-pointer whitespace-nowrap shrink-0"
                     >
                       Submit Note
                     </button>
                   </div>
-                </form>
+                </motion.form>
               )}
+              </AnimatePresence>
             </div>
           </div>
         </motion.div>

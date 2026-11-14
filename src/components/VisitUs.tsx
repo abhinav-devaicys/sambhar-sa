@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Check,
   Compass,
@@ -10,33 +10,44 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { BRAND } from '../data/sambharsa';
-
-const ease = [0.16, 1, 0.3, 1] as const;
+import { EASE_EDITORIAL, VIEWPORT_REVEAL } from '../lib/motion';
 
 export function VisitUs() {
   const [copied, setCopied] = useState(false);
+  const copyTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleCopyAddress = async () => {
     try {
       await navigator.clipboard.writeText(BRAND.address);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+      copyTimerRef.current = window.setTimeout(() => setCopied(false), 2500);
     } catch {
       setCopied(false);
     }
   };
 
   return (
-    <section id="visit-us" className="bg-[#F3EBDD] py-16 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+    <section id="visit-us" className="bg-[#F3EBDD] py-14 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-stretch">
           {/* Address & Directions Column */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, ease }}
-            className="lg:col-span-6 flex flex-col justify-between"
+            viewport={VIEWPORT_REVEAL}
+            transition={{ duration: 0.5, ease: EASE_EDITORIAL }}
+            className="lg:col-span-6 flex flex-col justify-between transform-gpu"
           >
             <div>
               <p className="text-xs sm:text-sm font-medium tracking-wide text-[#B63B32]">
@@ -44,7 +55,7 @@ export function VisitUs() {
               </p>
               <h2
                 className="mt-3 font-serif text-[#183D2D] leading-[1.08] tracking-tight"
-                style={{ fontSize: 'clamp(2.1rem, 3.6vw, 3.5rem)' }}
+                style={{ fontSize: 'clamp(1.85rem, 3.6vw, 3.5rem)' }}
               >
                 Your Table Is Waiting.
               </h2>
@@ -123,12 +134,12 @@ export function VisitUs() {
             </div>
 
             {/* Working Actions */}
-            <div className="mt-9 flex flex-wrap items-center gap-3.5">
+            <div className="mt-8 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-3 sm:gap-3.5">
               <a
                 href={BRAND.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2.5 bg-[#183D2D] px-6 py-3 text-sm font-semibold text-[#F3EBDD] transition-all duration-200 hover:bg-[#122f22] hover:-translate-y-0.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+                className="col-span-2 sm:col-span-1 inline-flex min-h-[48px] items-center justify-center gap-2.5 bg-[#183D2D] px-6 py-3 text-sm font-semibold text-[#F3EBDD] transform-gpu transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.2,0,0,1)] hover:bg-[#122f22] hover:-translate-y-0.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
               >
                 <span>Get Directions</span>
                 <ExternalLink
@@ -139,7 +150,7 @@ export function VisitUs() {
 
               <a
                 href={BRAND.phoneHref}
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D] px-6 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:bg-[#183D2D] hover:text-[#F3EBDD] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D] px-4 sm:px-6 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:bg-[#183D2D] hover:text-[#F3EBDD] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
               >
                 <Phone className="w-4 h-4" aria-hidden="true" />
                 <span>Call Now</span>
@@ -148,7 +159,7 @@ export function VisitUs() {
               <button
                 type="button"
                 onClick={handleCopyAddress}
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D]/35 px-5 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:border-[#183D2D] hover:bg-[#183D2D]/5 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#183D2D]/35 px-4 sm:px-5 py-3 text-sm font-semibold text-[#183D2D] transition-colors duration-200 hover:border-[#183D2D] hover:bg-[#183D2D]/5 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#183D2D]"
               >
                 {copied ? (
                   <>
@@ -167,16 +178,16 @@ export function VisitUs() {
 
           {/* Architectural Wayfinding & Storefront Preview Card */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, delay: 0.1, ease }}
-            className="lg:col-span-6 flex flex-col border border-[#D5C4A3] bg-[#D5C4A3]/20"
+            viewport={VIEWPORT_REVEAL}
+            transition={{ duration: 0.52, delay: 0.08, ease: EASE_EDITORIAL }}
+            className="lg:col-span-6 flex flex-col border border-[#D5C4A3] bg-[#D5C4A3]/20 transform-gpu"
           >
             {/* Editorial Wayfinding Diagram */}
-            <div className="p-6 sm:p-8 lg:p-10 flex-1 flex flex-col justify-between">
+            <div className="p-5 sm:p-8 lg:p-10 flex-1 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between gap-4 border-b border-[#D5C4A3] pb-4">
+                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4 border-b border-[#D5C4A3] pb-4">
                   <span className="font-serif text-xl text-[#183D2D]">
                     Gwalior Location Guide
                   </span>
@@ -186,7 +197,7 @@ export function VisitUs() {
                 </div>
 
                 {/* Clean Vector Wayfinding Schematic */}
-                <div className="my-7 border border-[#D5C4A3] bg-[#F3EBDD] p-5 sm:p-6">
+                <div className="my-5 sm:my-7 border border-[#D5C4A3] bg-[#F3EBDD] p-3.5 sm:p-6">
                   <svg
                     viewBox="0 0 480 210"
                     className="w-full h-auto"

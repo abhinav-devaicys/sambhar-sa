@@ -1,6 +1,7 @@
 import { ArrowUpRight, MapPin, Phone } from 'lucide-react';
 import { motion } from 'motion/react';
 import { BRAND } from '../data/sambharsa';
+import { EASE_EDITORIAL, VIEWPORT_REVEAL } from '../lib/motion';
 import { BrandMark } from './BrandMark';
 
 const FOOTER_LINKS = [
@@ -18,13 +19,13 @@ export function Footer() {
   return (
     <footer className="bg-[#183D2D] text-[#F3EBDD]">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14 pt-14 pb-10 sm:pt-18 sm:pb-12"
+        viewport={VIEWPORT_REVEAL}
+        transition={{ duration: 0.48, ease: EASE_EDITORIAL }}
+        className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-14 pt-12 pb-9 sm:pt-18 sm:pb-12 transform-gpu"
       >
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-[#D5C4A3]/20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 pb-10 sm:pb-12 border-b border-[#D5C4A3]/20">
           {/* Brand Column */}
           <div className="md:col-span-5">
             <a href="#home" aria-label="SambharSa Gwalior Top">
@@ -45,7 +46,7 @@ export function Footer() {
             <h2 className="font-sans text-xs font-semibold tracking-wide text-[#E7B928]">
               Explore
             </h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-3 sm:mt-4 space-y-1 sm:space-y-2.5">
               {FOOTER_LINKS.map((item) => (
                 <li key={item.label}>
                   <a
@@ -53,7 +54,7 @@ export function Footer() {
                     {...(item.external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
-                    className="text-sm text-[#F3EBDD]/85 hover:text-[#E7B928] transition-colors"
+                    className="inline-flex min-h-[36px] sm:min-h-0 items-center text-sm text-[#F3EBDD]/85 hover:text-[#E7B928] transition-colors"
                   >
                     {item.label}
                   </a>

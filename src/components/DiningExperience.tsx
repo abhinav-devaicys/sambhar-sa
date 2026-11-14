@@ -1,8 +1,7 @@
 import { motion } from 'motion/react';
 import { EXPERIENCE_GALLERY } from '../data/sambharsa';
+import { EASE_EDITORIAL, VIEWPORT_REVEAL } from '../lib/motion';
 import { ResilientImage } from './ResilientImage';
-
-const ease = [0.16, 1, 0.3, 1] as const;
 
 export function DiningExperience() {
   const mainPhoto = EXPERIENCE_GALLERY[0];
@@ -11,15 +10,15 @@ export function DiningExperience() {
   return (
     <section
       id="experience"
-      className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-16 sm:py-24 lg:py-28"
+      className="border-b border-[#D5C4A3]/60 bg-[#F3EBDD] py-14 sm:py-20 lg:py-28"
     >
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-14">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6, ease }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-end pb-10 sm:pb-14"
+          viewport={VIEWPORT_REVEAL}
+          transition={{ duration: 0.5, ease: EASE_EDITORIAL }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-12 items-end pb-8 sm:pb-14 transform-gpu"
         >
           <div className="lg:col-span-7">
             <p className="text-xs sm:text-sm font-medium tracking-wide text-[#B63B32]">
@@ -27,7 +26,7 @@ export function DiningExperience() {
             </p>
             <h2
               className="mt-3 font-serif text-[#183D2D] leading-[1.1] tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 3.4vw, 3.3rem)' }}
+              style={{ fontSize: 'clamp(1.85rem, 3.4vw, 3.3rem)' }}
             >
               Come For The Flavours. Stay For The Experience.
             </h2>
@@ -46,18 +45,18 @@ export function DiningExperience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Primary Wide Dining Room Photo */}
           <motion.figure
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.65, ease }}
-            className="lg:col-span-7 flex flex-col"
+            viewport={VIEWPORT_REVEAL}
+            transition={{ duration: 0.52, ease: EASE_EDITORIAL }}
+            className="lg:col-span-7 flex flex-col transform-gpu"
           >
             <div className="group relative overflow-hidden bg-[#D5C4A3]/30 aspect-[16/10] lg:flex-1">
               <ResilientImage
                 src={mainPhoto.image}
                 alt={mainPhoto.imageAlt}
                 fallbackTitle={mainPhoto.title}
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
               />
             </div>
             <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-t border-[#D5C4A3]/60 pt-3">
@@ -72,18 +71,18 @@ export function DiningExperience() {
 
           {/* Authentic Storefront Photo */}
           <motion.figure
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.65, delay: 0.12, ease }}
-            className="lg:col-span-5 flex flex-col"
+            viewport={VIEWPORT_REVEAL}
+            transition={{ duration: 0.52, delay: 0.08, ease: EASE_EDITORIAL }}
+            className="lg:col-span-5 flex flex-col transform-gpu"
           >
             <div className="group relative overflow-hidden bg-[#D5C4A3]/30 aspect-[4/3] lg:flex-1">
               <ResilientImage
                 src={sidePhoto.image}
                 alt={sidePhoto.imageAlt}
                 fallbackTitle={sidePhoto.title}
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
               />
             </div>
             <figcaption className="mt-4 flex flex-col gap-1 border-t border-[#D5C4A3]/60 pt-3">

@@ -38,6 +38,7 @@ export function ResilientImage({
       src={src}
       alt={alt}
       loading={loading}
+      decoding="async"
       referrerPolicy="no-referrer"
       onError={() => setHasError(true)}
       className={className}

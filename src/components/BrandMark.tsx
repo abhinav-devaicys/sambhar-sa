@@ -10,11 +10,11 @@ export function BrandMark({
 }: BrandMarkProps) {
   if (variant === 'light') {
     return (
-      <span className="inline-flex items-center whitespace-nowrap shrink-0 rounded-2xl bg-white px-2 py-1 shadow-sm">
+      <span className="inline-flex items-center whitespace-nowrap shrink-0 rounded-xl sm:rounded-2xl bg-white px-1.5 py-0.5 sm:px-2 sm:py-1 shadow-sm">
         <img
           src={officialLogoMark}
           alt="SambharSa — Chasing Flavours of the South!"
-          className="h-11 sm:h-12 w-auto object-contain select-none"
+          className="h-9 sm:h-11 lg:h-12 w-auto object-contain select-none"
         />
       </span>
     );
@@ -25,7 +25,7 @@ export function BrandMark({
       <img
         src={officialLogoMark}
         alt="SambharSa — Chasing Flavours of the South!"
-        className="h-10 sm:h-11 w-auto object-contain mix-blend-multiply select-none"
+        className="h-9 sm:h-10 lg:h-11 w-auto object-contain mix-blend-multiply select-none"
       />
     </span>
   );
